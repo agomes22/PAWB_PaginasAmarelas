@@ -1,0 +1,24 @@
+{{set . "title" "Login"}}
+{{template "header.html" .}}
+
+<div id="login" class="col-md-2 col-md-offset-5">
+
+
+    <form action="{{url "Login.Auth"}}" id="formLogin" method="POST">
+    <p class="field">
+      <label>Username:</label>
+      <input type="text" name="username" size="19" value="{{.flash.username}}" />
+    </p>
+    <p class="field">
+      <label>Password:</label>
+      <input type="password" name="password" size="19"/>
+    </p>
+    <p class="buttons">
+      <input type="submit" value="Account login" />
+    </p>
+  </form>
+
+</div>
+
+
+{{template "footer.html" .}}

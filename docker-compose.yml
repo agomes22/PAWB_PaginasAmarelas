@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+    web:
+        depends_on: 
+            - db        
+        build: .
+        ports:
+            - '80:9000' 
+        #command: "revel new -a teste"
+        networks: 
+            - 'net'
+        volumes:
+            - "./public/:/go/src/"
+            - "./script/:/go/src/script"
+        #command: "./script/start.sh"
+        command: bash -c "./script/start.sh"
+    db:
+        image: postgres:10-alpine
+        container_name: db
+        environment: 
+            POSTGRES_USER: dbuser
+            POSTGRES_PASSWORD: dbpass
+            POSTGRES_DB: dbpaginas
+        volumes:
+            - 'postgresData'
+            - './postgres:/docker-entrypoint-initdb.d'
+        ports:
+            - "5432:5432"
+        networks: 
+            - 'net'    
+
+volumes:
+    db-data:
+    postgresData: {}
+networks: 
+  net:    
